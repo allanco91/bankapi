@@ -87,7 +87,7 @@ namespace BankAPI
 
             app.UseAuthorization();
 
-            app.UseCors(option => option.AllowAnyOrigin());
+            app.UseCors(option => option.AllowAnyOrigin().AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {

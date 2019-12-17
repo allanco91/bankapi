@@ -31,6 +31,8 @@ namespace BankAPI
         {
             services.AddControllers();
 
+            services.AddCors();
+
             services.AddScoped<ITransactionsRepository, TransactionsRepository>();
 
             services.AddScoped<IMongoDatabase>(s =>
@@ -84,6 +86,8 @@ namespace BankAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(option => option.AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

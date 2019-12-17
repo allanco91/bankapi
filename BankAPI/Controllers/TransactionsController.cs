@@ -25,7 +25,7 @@ namespace BankAPI.Controllers
         [Route("hello")]
         public ActionResult<List<TransactionEntity>> Get()
         {
-            return Ok("Hello world!");
+            return Ok(new { message = "Hello world!" });
         }
 
         [HttpGet]

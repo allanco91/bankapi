@@ -76,12 +76,14 @@ namespace BankAPI.Repositories
         public async Task<List<MonthlyReportViewModel>> MonthlyReportAsync(int? account, int? year)
         {
             var transactions = from t in await ListWithNegativeValuesAsync() select t;
+            Random rnd = new Random();
 
             return transactions.Where(t => t.Account == account && t.Date.Year == year)
                 .GroupBy(g => new { g.Account, Date = new DateTime(g.Date.Year, g.Date.Month, 1) })
                 .OrderBy(t => t.Key.Date)
                 .Select(t => new MonthlyReportViewModel
                 {
+                    Id = rnd.Next(),
                     Account = t.Key.Account,
                     Date = t.Key.Date,
                     Credit = t.Where(x => !x.IsDebit).Sum(x => x.Value),
